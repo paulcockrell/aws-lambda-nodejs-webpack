@@ -156,6 +156,9 @@ export class NodejsFunction extends lambda.Function {
         // next line allows resolving not found modules to local versions (require("lib/log"))
         modules: ["node_modules", "${escapePathForNodeJs(process.cwd())}"],
         extensions: [ ".ts", ".js" ],
+        // fix for the crap that is Firebase
+        // see https://github.com/firebase/firebase-js-sdk/issues/329#issuecomment-357117654
+        mainFields: ["main"],
       },
       context: "${escapePathForNodeJs(process.cwd())}",
       devtool: "source-map",
